@@ -1,7 +1,14 @@
 # database-review
 
-Database Review
+Database Review using Oracle in SQL developer
 
-[`Outline`]()
+> Oracle <br/>
+> SQL developer
 
-Introduction
+#
+
+## **_Contents_**
+
+[`Outline`](https://github.com/ding-co/database-review/blob/main/Note/Outline/Outline.md)
+
+[`Introduction`](https://github.com/ding-co/database-review/blob/main/Note/Introduction/Introduction.md)
