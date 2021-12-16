@@ -39,7 +39,7 @@
     - 다수의 사용자가 동시에 하나의 DBMS에 접속해서 <br/>
       공통으로 하나의 DB 접근 및 사용 가능
   - Efficient / Convenient
-    - 효율적, 편리하게 Data 괸리 가능
+    - 효율적, 편리하게 Data 관리 가능
   - Reliable / Safe
     - 안전하고 신뢰성 있게 잘 관리
 
