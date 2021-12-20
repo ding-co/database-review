@@ -23,8 +23,8 @@
 ### _DBMS_
 
 - set of programs to access the data
-- convenient, efficient to use
-- DB applications
+- convenient, efficient to use 한 환경 제공
+- DB applications (사용 예)
   - banking, airlines, universities, sales, <br/>
     manufacturing, human resources
 - Commercial Systems (상용화)
@@ -43,39 +43,53 @@
   - stores programs, data, documents, or anything
   - (in disk)
 - 과거, 응용 프로그램 별도로 각각 만들어서 <br/>
-  그에 대한 필요한 데이터 파일도 각각 만들어서 작업했음 <br/>
-  (응용 프로그램들이 각각의 별도의 데이터 파일과 1:1로 연결)
+  그에 대한 필요한 데이터 파일도 각각 만들어 작업했음 <br/>
+  (응용 프로그램들이 각각의 별개의 데이터 파일과 1:1로 연결)
 - Drawbacks of using file systems
   - Data redundancy and inconsistency
   - Difficulty in accessing data
     - 각 데이터 포맷이 달라서 접근 방법 다를 수 있음
   - Data dependency
+    - 어떤 응용 프로그램은 특정 데이터 파일에 접근하는 용도로만 업무 수행 가능
+    - 응용 프로그램과 데이터 file이 매우 tight 한 관계
   - Data isolation
-    - 데이터 공유되어야 함
+    - 데이터가 고립되지 않고 공유되어야 함
+    - 응용 프로그램이 데이터 파일 사용 중이면 다른 응용 프로그램이 접근 불가
   - Integrity problems
-  - Atomicity of updates 보장 X
-    - 트랜잭션의 원자성 보존 필요
+    - Integrity Constraint (무결성); 결점이 없는 상태
+    - 일반 파일 시스템에서는 은행 계좌 잔고가 항상 양수여야 하는 조건 위해 <br/>
+      코드 일일이 다 작성해야 하는 단점 있음
+    - DBMS가 알아서 항상 무결성 만족시키도록 할 수 있음
+  - Atomicity of updates
+    - 파일 시스템에서는 갱신의 원자성 보존되지 않음
+    - ex) A 계좌 -> B 계좌로 500원 옮김
+      - 돈 옮기던 도중에 시스템 죽음 (500원 중간에 증발)
+      - 트랜잭션의 원자성 보존 필요 (DBMS는 알아서 해줌)
   - Concurrent access by multiple users
-    - 여러명 사용자들이 Data file 접근 불가 (file system)
+    - 여러 사용자들이 동시에 Data file 접근 불가 (file system)
+    - DBMS는 여러명 동시 접근 가능
   - security problems
 
 ### _DBMS_
 
 - 모든 응용 프로그램들을 하나의 DBMS로 관리 가능
 - 데이터의 종속성과 중복성 문제 해결
+  - 중복된 데이터 여러 곳에 저장하지 않고 한 곳에만 잘 저장
 - DB 공유, 관리 시스템
-- 장점
-  - 데이터 중복 최소화
-  - 데이터 공용
-  - 일관성 유지
-  - 무결성 유지
-  - 보안 보장
-  - 표준화 용이
+- DBMS 장점
+  - 데이터 중복(redundancy) 최소화
+  - 데이터 공용(sharing)
+  - 일관성(consistency) 유지
+  - 무결성(integrity) 유지
+  - 보안(security) 보장
+  - 표준화(standardization) 용이
+    - std_id, stid (서로 다른 테이블의 각 컬럼 명칭) -> 표준화!
   - 전체 데이터 요구 조정
-- 단점
+- DBMS 단점
   - 비용: H/W, DBMS, 운영비, 교육비, 개발비
-  - 프로그램 복잡화 (JDBC/ODBC 사용)
+  - 프로그램 복잡화 (JDBC/ODBC 통해 sql 작성해서 DB에서 다시 데이터 끌어옴)
   - 성능상 오버헤드
+    - 큰 DB에서 데이터 찾을 때 속도 저하 발생 가능 등 여러 문제...
 
 ### _Data Independence Property_
 
@@ -193,24 +207,26 @@
 - integrated (통합된)
 - 학사정보시스템; 학생의 학번, 주민번호, 이름, 학년, 전공 등 <br/>
   (기록할 만한 가치가 있는 정보)
+- DB는 컨텐츠 자체
 - DBMS (System/Software/Program)
 - 서버에 S/W를 띄움 <br/>
   s/w는 instance, 메모리 상에 프로그램이 올라가서 서버에서 돎
 - Connectivity (연계)
 - SQL (Structured Query Language, 구조화된 질의 어) <br/>
   DB에 접근 가능, 필요 data 추출
-- drawback (단점, 문제점)
+- 파일 시스템을 사용하면서 생기는 불편한 점들을 DBMS 사용으로 해소
+- drawback (단점/문제점)
 - redundancy (중복성)
-- inconsistency (불일치성, 부정합성)
+- inconsistency (불일치성/부정합성)
 - CSV (Comma Separated Value)
 - dependency (의존성)
 - isolation (고립성)
 - integrity constraint (무결성); 결점이 없는 상태
 - Atomicity (원자성)
 - Concurrent (동시의)
-- Concurrent <> Simultaneous
-  - Concurrent; 잠시 TV 봤다가 잠시 공부했다가 ~
-  - Simultaneous; 2명이 있고 한 사람은 TV만 보고 다른 사람은 공부만 함
+- Concurrent <> Simultaneous (동시의)
+  - Concurrent; 잠시 TV 봤다가 잠시 공부했다가 ~ (CPU 1개)
+  - Simultaneous; 2명이 있고 한 사람은 TV만 보고 다른 사람은 공부만 함 (CPU 2개)
 - Independence (독립성)
 - semantics (의미)
 - constraint(s) (제약사항)
