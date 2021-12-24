@@ -93,23 +93,23 @@
 
 ### _Data Independence Property_
 
-- 추상화 수준
+- 추상화 수준/단계
   - Level 3: View Level (프로그램의 데이터 구조)
   - Level 2: Logical Level (데이터베이스의 논리적 구조)
   - Level 1: Physical Level (데이터베이스의 물리적 구조)
 - Physical data independence
-  - physical level에서 어떤 데이터 변화가 일어나도 logical level 영향 X
+  - physical level에서 어떤 데이터 변화가 일어나도 logical level 영향 X (독립성 보장)
 - Logical data independence
   - logical level 에서 어떤 데이터 변화가 일어나도 view 레벨에서 영향 X or 최소화
 - Levels of Abstraction
-  - Physical Level: record
-  - Logical Level: column, data type
   - View Level: hide details of data types, information
+  - Logical Level: column, data type
+  - Physical Level: record
 
 ### _DBMS Architecture_
 
-- User Query
-- Query Processor
+- User Query (질의)
+- Query Processor (질의 처리기)
 - storage manager
 - disk storage
 
@@ -118,16 +118,19 @@
 - 1960s
   - Data collection, 네트워크 형태의 DBMS
 - 1970s
-  - RDB
+  - RDB model
 - 1980s
   - RDBMS, Application-oriented DBMS
   - RDBMS 상용화 됨 (오라클)
   - SQL 표준으로 제정됨
+  - 병렬/분산 DB
+  - OO-DBMS 소개됨
 - 1990s
   - Data mining, Data warehousing, web db search engines
   - OR-DBMS
+  - 수 TB 규모의 데이터 웨어하우스
 - 2000s
-  - Stream data management (IoT)
+  - Stream data management and mining (IoT)
   - Semantic web technology (XML)
 - 2010s
   - Big Data
@@ -136,7 +139,7 @@
 ### _Relational Model_
 
 - Data model
-  - Data 표현
+  - Data 표현 방법
     - List? Tree? Graph? Array?
   - A collection of tools for describing
     - data, data relationships, data semantics, data constraints
@@ -144,29 +147,29 @@
   - 주요 data model
     - Relational data model
     - Entity-Relationship(E-R) data model
-      - ER data model에 기반한 상용 DBMS는 없음
-      - DB 설계에 주로 이용됨
+      - ER data model에 기반한 상용 DBMS는 없음!
+      - DB 설계에 주로 이용됨! (DB 구축 전)
     - Object-Oriented/Object-Relational
       - OR-DBMS (현재 대부분의 RDBMS)
-    - Network, Hierarchical, ...
-  - 관계형 모델
+    - 기타; Network, Hierarchical, ...
+  - Relational Model (관계형 모델)
     - Relation(table) 기반한 모델, 사용 편리, 성능 우수
-    - SQL은 RDB에만 적용되는 표준 질의어
+    - SQL은 RDB에만 적용되는 표준 질의어!
   - Relational Model 주요 개념
-    - Domain (type): Attribue가 가질 수 있는 값의 집합
+    - Domain (type): Attribute가 가질 수 있는 값의 집합
       - Domain(학년) = {1,2,3,4}
-    - Attribute (column, field): 속성
+    - Attribute (field, column): 속성
     - Tuple (row, record): set of values for attributes, 행
     - Relation (table): set of tuples (record, row)
     - Database: set of relations (tables)
 - Schema vs. Instance
   - Schema (Scheme)
-    - 뼈대 (구조), types 느낌
+    - 뼈대(구조)
     - the logical/skeletal structure of the database
     - physical schema, logical schema
-    - 어떤 테이블의 명칭, 각 테이블의 column 명칭
+    - 어떤 테이블의 이름, 테이블의 여러 column(attribute)
   - Instance
-    - 뼈대에 들어가 있는 실제 Contents, variables 느낌
+    - 뼈대(구조)에 들어가 있는 실제 Contents (variables 같은 것, type은 schema)
     - 찰나의 순간, DB의 스냅샷
     - the actual content of the database at a particular point in time
     - 실제 내용물 (데이터 계속 변화 가능)
@@ -174,30 +177,45 @@
 ### _Key_
 
 - Key: Tuple을 구별하기 위한 Attribute 집합
-  - Relation은 동일한 tuple이 있을 수 없음
+  - Relation은 동일한 tuple이 있을 수 없음 (완전히 동일한 row 중복 불가)
+    - row 중 하나의 값 다른 것은 괜찮
   - 학생 테이블의 학번 컬럼, 주민번호 컬럼
-  - 이름 컬럼은 Key가 아님 (동명이인 가능)
+    - 동일한 학번 or 동일한 주민번호 불가
+    - {학번, 주민번호}도 key로 가능
+    - {학번, 이름}도 가능
+  - 이름 컬럼만은 Key가 아님 (동명이인 가능)
 - Superkey (수퍼키)
   - Relation에서 Unique하게 Tuple을 식별할 수 있는 Attribute의 집합
   - Key == SuperKey
+  - 유일성
 - Candidate Key (후보키)
   - SuperKey 중에서 Minimal 한 Key
   - Minimal: Attribute 집합에서 하나의 Attribute라도 빼면 더 이상 Key가 아님
+  - 유일성 + 최소성
   - {주민번호, 학번}은 Candidate Key가 아님, 하지만 Super Key임
-  - {주민번호}는 minimal한 key 이므로 candidate key 가능
+    - 두 attribute 중 하나 빼더라도 key 가능
+  - {주민번호}는 minimal한 Superkey 이므로 candidate key 가능
 - Primary Key (기본키/주키, PK)
   - Candidate Key 중 하나 선택 (Relation을 정의할 때 선택)
-  - Candidate key 중에서 선택되지 않은 key => alternative key
-  - Entity Integrity: NULL이 될 수 없음 (PK는 NULL 불가)
+  - Candidate key 중에서 선택되지 않은 key => alternative key (대체키)
+  - Entity Integrity: PK는 NULL이 될 수 없음
 - Foreign Key (참조키/외래키, FK)
 
   - 타 relation을 참조하는 attribute
   - 참조하는 relation에서 key가 아닐지라도, 참조되는 relation에서 PK인 경우
-  - Referential Integrity: FK 값들이 반드시 참조된 relation의 PK 값에 존재하거나 NULL이어야 함
+  - 참조하는 테이블 (Referencing) -> 참조받는 테이블 (Referenced)
+  - Referential Integrity: FK 값들이 반드시 참조되는 relation의 PK 값에 존재하거나 NULL이어야 함
 
 - NULL
   - unknown/undefined
   - 모든 Domain은 NULL 값 포함 (따로 not null 안한다고 가정)
+
+#
+
+Quiz 1
+
+- 학생, 교수, 학과 테이블의 key들을 모두 찾기
+- 각 key가 왜 성립하는지 설명
 
 #
 
@@ -206,13 +224,13 @@
 - entity (개체), object (객체)
 - integrated (통합된)
 - 학사정보시스템; 학생의 학번, 주민번호, 이름, 학년, 전공 등 <br/>
-  (기록할 만한 가치가 있는 정보)
+  (data: 기록할 만한 가치가 있는 정보)
 - DB는 컨텐츠 자체
 - DBMS (System/Software/Program)
 - 서버에 S/W를 띄움 <br/>
-  s/w는 instance, 메모리 상에 프로그램이 올라가서 서버에서 돎
+  => s/w는 instance, 메모리 상에 프로그램이 올라가서 서버에서 돎
 - Connectivity (연계)
-- SQL (Structured Query Language, 구조화된 질의 어) <br/>
+- SQL (Structured Query Language, 구조화된 질의어) <br/>
   DB에 접근 가능, 필요 data 추출
 - 파일 시스템을 사용하면서 생기는 불편한 점들을 DBMS 사용으로 해소
 - drawback (단점/문제점)
