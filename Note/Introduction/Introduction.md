@@ -210,6 +210,100 @@
   - unknown/undefined
   - 모든 Domain은 NULL 값 포함 (따로 not null 안한다고 가정)
 
+### _Entity-Relationship Model_
+
+- ER Model Schema 예제
+  - ERD (Entity Relationship Diagram); DB 상황 설명하는 편리한 모델
+  - customer; id, name, street, city
+  - account; account-number, balance
+  - depositor (관계, 소유주)
+- 직사각형; Entity/objects (개체)
+- 다이아몬드; Relationship (관계 set)
+- 타원; Attribute (속성)
+- DB 설계 단계에서 주로 사용됨 (DB 구축 전)
+- ERD에 표준이 없음
+- ERD를 RDB로 변환하여 실제로 DB 구축함
+
+### _Database Languages_
+
+- Data Definition Language (DDL)
+  - 데이터 정의어
+  - DB Schema 정의하는 언어
+  - ex. create table, drop column
+- Data Manipulation Language (DML)
+  - 데이터 조작어
+  - DB의 data 조작하는 언어 (Schema는 불변)
+  - ex. retrieve/select, insert, delete, change/update
+- Data Control Language (DCL)
+  - 데이터 제어어
+  - DB의 constraint 제어하는 언어
+- Transaction Control Language (TCL)
+- SQL; RDB에서 사용하는 질의어의 표준
+  - 구조화된 질의어
+  - DML에만 해당하는 것 아님!!!!! (질의만 할 수 있는 것 아님)
+  - DDL, DCL 등 다 포함
+- Procedural vs. non-procedural language
+  - procedural; what data + how to get those data
+    - ex. Relational Algebra (관계 대수 중요)
+  - non-procedural; declarative, what data only needed
+    - ex. Relational Calculus, SQL (SQL도 선언적인 DB 언어)
+- Query (질의); 정보를 검색하는 것에 대한 요청하는 문
+  - 현업에서 query language는 DML이라고 보통 말하지만 <br/>
+    SQL은 DML만 해당하는 것은 아님!
+
+### _Structured Query Language (SQL)_
+
+- SQL
+  - ex. select ... from ... where ...
+  - select 에는 column, from 에는 table
+- 보통 ODBC/JDBC 같은 Application program interface 이용하여 DB에 SQL 보냄
+
+### _Transaction Management_
+
+- Transaction
+  - 여러 operation들의 집합이 모여서 하나의 논리적 function 처럼 수행
+  - ex. money transfer
+  - A 계좌 -> B 계좌 돈 이동
+  - 각 계좌에 해당하는 2개의 operation 을 하나의 논리적 단위로 묶음
+- DBMS transaction 보장하는 4가지 property
+  - ACID
+    - Atomicity; all or nothing
+      - 두 연산중 하나만 수행되면 안됨
+    - Consistency; same
+      - 트랜잭션 수행 이전과 수행 이후 모두 데이터 일관성 유지
+    - Isolation; alone
+      - 트랜잭션 수행하는 여러 주체가 동시에 트랜잭션 수행하더라도 <br/>
+        나는 마치 하나의 독립적인 시스템 사용하는 것처럼 보장 필요
+    - Durability; effect should be persistent
+      - 한번 트랜잭션 수행된 결과는 영원히 지속!
+
+### _Typical Web-based Application Architecture_
+
+- 3 티어 웹 아키텍쳐
+  - 1 티어; Client
+    - browser
+  - 2 티어; Middle Tier (Presentation Layer, Business Logic Layer)
+    - Web Server, Web Application Server
+  - 3 티어; Data Layer
+    - Database
+
+### _정리_
+
+- DB
+- DBMS
+- DBMS 장점
+- Relational Model
+- Terminologies
+  - Domain, Attribute, Tuple, Relation
+  - Schema vs. Instance
+  - Superkey, Candidate Key, Primary Key, Foreign Key
+  - NULL
+- DB Languages
+  - DDL, DML, DCL
+  - SQL
+- Transaction
+  - ACID
+
 #
 
 Quiz 1
@@ -251,3 +345,5 @@ Quiz 1
 - relation (table, 표)
 - set (집합)
 - candidate (후보)
+- manipulate (조작하다)
+- Retrieval (검색)
