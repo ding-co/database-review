@@ -166,15 +166,103 @@
 
 - SQL 던져도 내부적으로는 relational algebra로 변환되어 수행됨
 - query -> parsing & translator -> relational algebra expression <br/>
-  optimizer -> execution plan -> evaluation engine -> query output
+  -> optimizer -> execution plan -> evaluation engine -> query output
+
+## _Relational Algebra_
+
+- Algebra (대수); operators, operands
+  - relational algebra (relation 대상으로 연산)
+    - operands; relations
+    - operators; basic/primitive operators (+ additional operations)
+      - 기본 연산 ex. 덧셈 (`+`)
+      - 곱셈 (`*`)은 기본 연산자가 아님, 덧셈 연산자들의 조합으로 표현 가능
+        - additional operator
+- Procedural Language
+- 6개의 basic operators
+  - select; 시그마 기호
+  - project; 파이 비슷한 기호
+  - union; U 기호
+  - set difference; - 기호
+  - Cartesian product; X 기호
+  - rename; p 같은 기호
+- 연산자들은 1개 또는 2개의 relations들을 input으로 삼아서 <br/>
+  결과로 하나의 새로운 relation을 줌
+  - 닫혀 있다 개념
+- Selection of tuples
+  - 시그마 기호로 표현
+  - unary operator (단항 연산자, operand가 1개인 경우)
+  - 테이블의 schema는 변함 없음
+  - 조건에 맞는 튜플만 select
+  - relational algebra로 표현할 수 있어야 함!
+- Selection of Columns (attributes)
+  - selection 이라기 보다는 projection/project 라고 함
+  - 파이 기호로 표현
+  - unary operator (연산항 1개임, 피연산자 => relation 1개)
+  - project attributes(columns)
+  - relational model에서는 중복 튜플 허용 X
+  - 중복 튜플 자동으로 제거해서 결과 relation 나옴!!!!!
+- Joining two relations - Cartesian Product
+  - X 기호로 표현
+  - 컬럼 수평으로 다 붙임
+  - r X s => r 튜플 개수 x s 튜플 개슈
+    - r에 있는 모든 튜플과 s에 있는 모든 튜플 join 되도록 만듦
+  - Cartesian Product 연산자는 binary operator (피연산자, 즉 relation 2개)
+- Union of two relations
+  - 합집합
+  - U 기호로 표현
+  - 수학적으로 relation은 사실 tuple들의 집합임
+  - 합집합 연산 성립하기 위해서는 피연산자 2개인 relation 2개가 <br/>
+    compatible 해야 함!
+    - 2개 relation이 schema 즉 구조가 똑같아야 함!
+    - 각각 컬럼 구성이 똑같아야 함! (테이블 이름은 괜찮..)
+  - 합집합 연산자는 binary operator
+- Set difference
+  - 차집합
+  - `-` 기호로 표현
+  - binary operator
+  - 마찬가지로 피연산자 2개인 relation 2개가 모두 schema 같아야 함!
+- Set intersection
+  - 교집합
+  - n자 기호 비슷
+  - 두 relation 서로 compatible
+  - binary operator
+  - 중요) 교집합은 primitive/basic/기본 연산자가 아님!
+    - 다른 연산자를 통해 교집합을 대체할 수 있음!
+- Joining two relations - Natural Join (자연 조인)
+  - 리본 모양 기호로 표현
+  - binary operator
+  - 2개의 relation을 수평적으로 합침
+  - 조건: 2개의 relation 중에서 최소 하나 이상의 공통 column 있어야 함!
+  - 공통 column 한번씩 합쳐짐
+  - primitive operator 아님
+- 2개의 table 합치는 연산자 중 primitive operator은 Cartesian Product가 유일함!
+- 정리
+  - Relational Model
+    - Relation, tuple, attribute
+    - Schema, Instance
+    - keys
+  - E-R Diagram
+    - E-R Model
+    - Keys
+      - Cardinality
+  - SQL vs. Relational Algebra
+    - SELECT ... FROM ... WHERE
+    - basic(primitive) relational operators
+    - additional relational operators
 
 ### [Quiz]
 
 - SELECT ... FROM ... WHERE ...
   - 쿼리 결과
+- r n s 를 다른 연산자를 통해 대체해보기!
+  - basic operator 이용해서
+  - 집합 연산자를 사용해서 대체 가능 (집합 연산자들 중에서 기본 연산자)
 
 #
 
 ### [Note]
 
 - atomic (원자성의)
+- operand (연산항, 피연산자)
+- relational algebra에서는 어떤 operation 가해도 그 결과는 다시 relation으로 나옴!
+- compatible (호환성 있는)

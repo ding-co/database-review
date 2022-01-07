@@ -12,3 +12,5 @@ Database Review using Oracle in SQL developer
 [`Outline`](https://github.com/ding-co/database-review/blob/main/Note/Outline/Outline.md)
 
 [`Introduction`](https://github.com/ding-co/database-review/blob/main/Note/Introduction/Introduction.md)
+
+[`Relational Model`](https://github.com/ding-co/database-review/blob/main/Note/Relational-model/Relational-model.md)
