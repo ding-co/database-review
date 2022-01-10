@@ -128,6 +128,82 @@
   - 각 쿼리에 대해서 relational algebra로 표현해보기!
   - basic operator 만 사용하기
 
+## From SQL to Relational Algebra
+
+- 상용 DBMS는 SQL 통해 질의함
+- parsing & translation
+- optimization
+  - relational algebra operation 순서 정하기!
+- evaluation
+
+## Additional Operation
+
+- Set-Intersection
+- Natural Join, Theta Join
+- Assignment
+- Outer Join
+
+## Set-Intersection
+
+- 교집합
+- basic operator 아님!
+  - 차집합의 combination으로 표현 가능
+- r n s
+- 조건
+  - same arity (컬럼 개수 같음)
+  - r,s compatible (r, s 동일한 스키마, 모든 attribute 도메인 동일)
+- r n s = r - (r - s)
+
+## Natural-Join
+
+- r 리본 s
+- 자연 조인
+- 공통된 컬럼 확인하고, 공통된 컬럼은 한번만 사용
+  - 두 스키마의 합집합 (컬럼의 합집합)
+- 카티션 곱해서 공통 컬럼에 대한 튜플만 selection하고 공통 컬럼에 대해 프로젝션 하는 것과 동일
+
+## Theta Join
+
+- 특이한 케이스의 join
+- natural join 하는데 세타라는 임의의 조건을 줌
+- r X s 카티션 곱하는데 세타를 만족하는 조건에 해당하는 튜플만 뽑아냄
+- 세타의 조건이 equality 인 경우 => equi join
+  - equi 조인은 natural 조인과 다름
+  - equi 조인은 카티션 곱하면서 진행함 (natural 조인은 나중에 프로젝션까지 함)
+  - 스키마 자체가 달라짐!
+
+## Assignment Operation
+
+- 할당 연산자
+- <- 기호
+- temporary relation variable 만들기 위한 용도로 사용
+
+## Outer Join
+
+- natural join operation 하게 되면 조인 조건에 의해 사라지는 튜플들 보존 위함
+- natural join 할 때 왼쪽 테이블에 있는 튜플들이 사라지는 것을 살리고 싶음
+  - Left Outer Join
+  - 그 반대는 Right Outer Join
+  - 다 살리고 싶으면 Full Outer Join
+- Outer Join 하게 되면 null 필연적으로 사용하게 됨
+  - null; unknown or not exist
+  - null 강제로 넣음 (null padding)
+- outer join can be expressed using basic operators
+
+## Null Values
+
+- null; unknown or not exist
+  - null 에 대한 수식 결과는 null
+  - aggregate function (집계 함수)에서 null 취급 중요한 이슈
+    - null 값 무시
+  - null 나오면 상용 DBMS 사용하면서 체크 필요
+- true, false, unknown
+- three valued logic
+  - SQL 에서 P is unknown (P는 predicate 조건)
+  - WHERE 절
+    - 만약 P가 unknown으로 evaluate 되면 P is unknown은 참이라고 취급
+  - 참고) SQL에서 P가 unknown이면 false로 취급해서 tuple 안 가져올 수 있음
+
 #
 
 ### [Note]
@@ -136,4 +212,14 @@
   - 개념/이론상으로만 존재하는 언어임!
   - 이것을 직접 활용하여 수행할 수 있는 DBMS는 없음
 - relation; set of tuples
-- section (강좌)
+- section (강좌), course (교과목), time_slot (1교시, 2교시, ...)
+- prerequisite (선수과목)
+- 주어진 쿼리에 대해서 relational algebra로 표현하는 방법이 <br/>
+  고유하게 1개로 존재하는 것 아님!
+  - 여러 개 있을 수 있음
+- DB 스키마 보고 semantic 잘 이해해야 함
+  - 쿼리를 Relational Algebra 로 만들어보는 연습!
+- 최댓값 찾을 때 셀프 조인하면 됨 (rename 활용해서)
+- 소문자 r, s (instance)
+- 대문자 R, S (Schema)
+- aggregate function (집계 함수); sum, average, count, ... 등 수식을 통해 나오는 집계
