@@ -204,6 +204,68 @@
     - 만약 P가 unknown으로 evaluate 되면 P is unknown은 참이라고 취급
   - 참고) SQL에서 P가 unknown이면 false로 취급해서 tuple 안 가져올 수 있음
 
+## Division Operator
+
+- 추가 연산자
+- r(R), s(S) 에서 S가 R의 부분 집합일 때, <br/>
+  r / s => t(R-S) 만족하는 것 중에서 가장 큰 것
+- 'for all'
+- division operation 성립 위해서는 R의 스키마가 S의 스키마 포함해야 함
+
+## Extended Relational Algebra Operations
+
+- Generalized Projection
+  - projection 하는데 컬럼에 산술연산 처리 가능
+- Aggregate Functions (집계 함수)
+  - avg, min, max, sum, count, ...
+  - [그룹] G aggregate(attribute) (E)
+
+## Modification of the Database
+
+- Deletion
+  - 차집합 연산자 이용
+  - r <- r - E
+    - r, E는 compatible (같은 스키마)
+    - 튜플 제거
+- Insertion
+  - 합집합 연산자 이용
+  - r <- r U E
+- Updating
+  - generalized projection operator 사용 가능
+  - r <- 파이 F1, ... Fn (r)
+
+## Relational Algebra to SQL
+
+- 실제로는 방향은 SQL -> Relational Algebra로 transfer 일어남
+- 학습 관점에서는 양방향으로 자유자재로 변환할 수 있도록 연습!
+
+## Multiset Relational Algebra
+
+- multiset 아닌 관계 대수는 sql과 같지 않음
+  - pure relational algebra는 중복 허용 X (참고 - SQL은 중복 허용함)
+    - ex. after projection
+- multiset Relational Algebra
+  - retain duplicates (중복 유지/보존함)
+  - selection, projection 등 했을 때도 다 duplicate 남겨놓음
+
+## SQL and Multiset Relational Algebra
+
+- SELECT 컬럼 FROM 테이블 WHERE P (조건)
+- SQL에서는 aggregate function 사용할 때는 보통 group by 이용해서 함
+  - relational algebra; generalized aggregate function => G
+  - as로 rename도 가능
+
+## Summary
+
+- Relational algebra
+  - basic vs. additional operations
+  - operation exercises
+  - natural, theta, outer joins
+- other operations
+  - division, generalized projection, aggregate functions
+- database modification
+- relational algebra to SQL
+
 #
 
 ### [Note]
@@ -223,3 +285,6 @@
 - 소문자 r, s (instance)
 - 대문자 R, S (Schema)
 - aggregate function (집계 함수); sum, average, count, ... 등 수식을 통해 나오는 집계
+- duplicate (중복)
+- retain (유지/보존하다)
+- cartesian product와 cross product 동일한 의미임

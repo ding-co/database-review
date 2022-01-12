@@ -16,3 +16,5 @@ Database Review using Oracle in SQL developer
 [`Relational Model`](https://github.com/ding-co/database-review/blob/main/Note/Relational-model/Relational-model.md)
 
 [`Relational Algebra`](https://github.com/ding-co/database-review/blob/main/Note/Relational-algebra/Relational-algebra.md)
+
+[`Structured Query Language`](https://github.com/ding-co/database-review/blob/main/Note/Structured-query-language/Structured-query-language.md)
